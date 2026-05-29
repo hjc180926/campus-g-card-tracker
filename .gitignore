@@ -1,0 +1,21 @@
+# Keil 编译产物
+Objects/
+Listings/
+DebugConfig/
+*.o
+*.d
+*.crf
+*.lst
+*.axf
+*.hex
+*.bin
+*.map
+*.dep
+*.scvd
+*.uvguix.*
+JLinkLog.txt
+*.bak
+
+# Windows
+Thumbs.db
+desktop.ini
