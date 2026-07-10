@@ -44,7 +44,6 @@ void Motor_Init(void)
     TIM_CtrlPWMOutputs(TIM1, ENABLE);
 }
 
-// 新增：电机彻底停止函数
 void Motor_Stop(void)
 {
     Motor_SetSpeed(0, 0);
@@ -101,4 +100,3 @@ int GFP_abs(int p)
 {
     return p > 0 ? p : -p;
 }
-

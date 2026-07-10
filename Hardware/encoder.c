@@ -1,9 +1,9 @@
 #include "encoder.h"
 
-// È«¾Ö±äÁ¿£ºÀÛ¼Æ×ÜÂö³å
+// å…¨å±€å˜é‡ï¼šç´¯è®¡æ€»è„‰å†²
 static int32_t total_pulse = 0;
 
-// ===================== ×óÂÖ±àÂëÆ÷ TIM2 ³õÊ¼»¯£¨ÎŞĞèĞŞ¸Ä£¬Òı½Å/Ä£Ê½ÓëMG513X¼æÈİ£© =====================
+// ===================== å·¦è½®ç¼–ç å™¨ TIM2 åˆå§‹åŒ–ï¼ˆæ— éœ€ä¿®æ”¹ï¼Œå¼•è„š/æ¨¡å¼ä¸MG513Xå…¼å®¹ï¼‰ =====================
 void Encoder_TIM2_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -13,7 +13,7 @@ void Encoder_TIM2_Init(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
-    // MG513X±àÂëÆ÷×Ô´øÉÏÀ­£¬¸¡¿ÕÊäÈë¼´¿É²É¼¯
+    // MG513Xç¼–ç å™¨è‡ªå¸¦ä¸Šæ‹‰ï¼Œæµ®ç©ºè¾“å…¥å³å¯é‡‡é›†
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
     GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -23,12 +23,12 @@ void Encoder_TIM2_Init(void)
     TIM_TimeBaseInitStruct.TIM_Prescaler = 0;
     TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStruct);
 
-    // ËÄ±¶Æµ±àÂëÆ÷Ä£Ê½£¨MG513XÖ§³ÖÕı½»¼ÆÊı£¬ÎŞĞèĞŞ¸Ä£©
+    // å››å€é¢‘ç¼–ç å™¨æ¨¡å¼ï¼ˆMG513Xæ”¯æŒæ­£äº¤è®¡æ•°ï¼Œæ— éœ€ä¿®æ”¹ï¼‰
     TIM_EncoderInterfaceConfig(TIM2, TIM_EncoderMode_TI12,
                                TIM_ICPolarity_Falling, TIM_ICPolarity_Falling);
 
     TIM_ICStructInit(&TIM_ICInitStruct);
-    TIM_ICInitStruct.TIM_ICFilter = 8;  // ÂË²¨Ïû¶¶£¨MG513X»ô¶û±àÂëÆ÷ÎŞ´Å¶¶£¬¿É±£Áô£©
+    TIM_ICInitStruct.TIM_ICFilter = 8;  // æ»¤æ³¢æ¶ˆæŠ–ï¼ˆMG513Xéœå°”ç¼–ç å™¨æ— ç£æŠ–ï¼Œå¯ä¿ç•™ï¼‰
     TIM_ICInit(TIM2, &TIM_ICInitStruct);
     TIM_ICInitStruct.TIM_Channel = TIM_Channel_2;
     TIM_ICInit(TIM2, &TIM_ICInitStruct);
@@ -37,7 +37,7 @@ void Encoder_TIM2_Init(void)
     TIM_Cmd(TIM2, ENABLE);
 }
 
-// ===================== ÓÒÂÖ±àÂëÆ÷ TIM4 ³õÊ¼»¯£¨ÎŞĞèĞŞ¸Ä£¬Òı½Å/Ä£Ê½ÓëMG513X¼æÈİ£© =====================
+// ===================== å³è½®ç¼–ç å™¨ TIM4 åˆå§‹åŒ–ï¼ˆæ— éœ€ä¿®æ”¹ï¼Œå¼•è„š/æ¨¡å¼ä¸MG513Xå…¼å®¹ï¼‰ =====================
 void Encoder_TIM4_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -69,7 +69,7 @@ void Encoder_TIM4_Init(void)
     TIM_Cmd(TIM4, ENABLE);
 }
 
-// ===================== ¶ÁÈ¡±àÂëÆ÷Âö³å£¨¶ÁºóÇåÁã£¬ÎŞĞèĞŞ¸Ä£© =====================
+// ===================== è¯»å–ç¼–ç å™¨è„‰å†²ï¼ˆè¯»åæ¸…é›¶ï¼Œæ— éœ€ä¿®æ”¹ï¼‰ =====================
 int16_t Read_Encoder(int TIMx)
 {
     int16_t val = 0;
@@ -81,25 +81,25 @@ int16_t Read_Encoder(int TIMx)
     return val;
 }
 
-// ===================== ¸üĞÂÀï³Ì£¨½öµ÷ÓÃ1´Î£¬ÎŞÖØ¸´ÀÛ¼Æ£¬ÎŞĞèĞŞ¸Ä£© =====================
+// ===================== æ›´æ–°é‡Œç¨‹ï¼ˆä»…è°ƒç”¨1æ¬¡ï¼Œæ— é‡å¤ç´¯è®¡ï¼Œæ— éœ€ä¿®æ”¹ï¼‰ =====================
 void Update_Distance(int16_t left, int16_t right)
 {
     total_pulse += (abs(left) + abs(right)) / 2;
 }
 
-// ===================== »ñÈ¡×ÜÀï³Ì£¨cm£¬ºËĞÄÒÀÀµPULSE_PER_CM£¬ÒÑÊÊÅäMG513X£© =====================
+// ===================== è·å–æ€»é‡Œç¨‹ï¼ˆcmï¼Œæ ¸å¿ƒä¾èµ–PULSE_PER_CMï¼Œå·²é€‚é…MG513Xï¼‰ =====================
 int32_t Get_Total_CM(void)
 {
     return total_pulse / PULSE_PER_CM;
 }
 
-// ===================== ÇåÁãÀï³Ì£¨ÎŞĞèĞŞ¸Ä£© =====================
+// ===================== æ¸…é›¶é‡Œç¨‹ï¼ˆæ— éœ€ä¿®æ”¹ï¼‰ =====================
 void Reset_Distance(void)
 {
     total_pulse = 0;
 }
 
-// ¿ÕÖĞ¶Ï·şÎñº¯Êı£¨ÎŞĞèĞŞ¸Ä£©
+// ç©ºä¸­æ–­æœåŠ¡å‡½æ•°ï¼ˆæ— éœ€ä¿®æ”¹ï¼‰
 void TIM2_IRQHandler(void){}
 void TIM4_IRQHandler(void){}
 

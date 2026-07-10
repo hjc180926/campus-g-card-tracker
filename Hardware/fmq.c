@@ -1,33 +1,33 @@
 #include "stm32f10x.h"
 
-// ·äÃùÆ÷Òı½Å£ºPB5  ¸ßµçÆ½´¥·¢Ïì
+// èœ‚é¸£å™¨å¼•è„šï¼šPB5  é«˜ç”µå¹³è§¦å‘å“
 void FMQ_Init(void)
 {
-    // ¿ªÆôGPIOBÊ±ÖÓ
+    // å¼€å¯GPIOBæ—¶é’Ÿ
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;  // ¸ÄÎª PB5
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;  // æ”¹ä¸º PB5
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-    GPIO_ResetBits(GPIOB, GPIO_Pin_5);  // ³õÊ¼×´Ì¬£º¹Ø±Õ
+    GPIO_ResetBits(GPIOB, GPIO_Pin_5);  // åˆå§‹çŠ¶æ€ï¼šå…³é—­
 }
 
-// ¿ªÆô·äÃùÆ÷
+// å¼€å¯èœ‚é¸£å™¨
 void FMQ_ON(void)
 {
     GPIO_SetBits(GPIOB, GPIO_Pin_5);
 }
 
-// ¹Ø±Õ·äÃùÆ÷
+// å…³é—­èœ‚é¸£å™¨
 void FMQ_OFF(void)
 {
     GPIO_ResetBits(GPIOB, GPIO_Pin_5);
 }
 
-// ·­×ª·äÃùÆ÷×´Ì¬
+// ç¿»è½¬èœ‚é¸£å™¨çŠ¶æ€
 void FMQ_Turn(void)
 {
     if(GPIO_ReadOutputDataBit(GPIOB, GPIO_Pin_5) == 0)

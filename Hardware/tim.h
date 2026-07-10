@@ -3,9 +3,9 @@
 
 #include "stm32f10x.h"
 
-extern uint32_t run_time_ms;   // ÔËĞĞ×ÜÊ±¼ä£¨ºÁÃë£©
-extern uint8_t  time_run_flag;  // ¼ÆÊ±ÔËĞĞ±êÖ¾
-extern uint8_t  oled_refresh_flag; // OLEDË¢ĞÂ±êÖ¾
+extern uint32_t run_time_ms;   // è¿è¡Œæ€»æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
+extern uint8_t  time_run_flag;  // è®¡æ—¶è¿è¡Œæ ‡å¿—
+extern uint8_t  oled_refresh_flag; // OLEDåˆ·æ–°æ ‡å¿—
 
 void TIM3_Init(void);
 

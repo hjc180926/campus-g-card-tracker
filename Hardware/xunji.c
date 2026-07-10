@@ -1,6 +1,6 @@
 #include "xunji.h"
 
-// ºìÍâÄ£Ê½£º¼ÇÂ¼ÉÏÒ»´Îµç»úËÙ¶È£¬¶ªÏß±£³Ö
+// çº¢å¤–æ¨¡å¼ï¼šè®°å½•ä¸Šä¸€æ¬¡ç”µæœºé€Ÿåº¦ï¼Œä¸¢çº¿ä¿æŒ
 static int16_t last_left  = -STRAIGHT_SPEED;
 static int16_t last_right = -STRAIGHT_SPEED;
 
@@ -9,7 +9,7 @@ void Track_Init(void)
     GPIO_InitTypeDef GPIO_InitStruct;
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB, ENABLE);
 
-    GPIO_InitStruct.GPIO_Mode  = GPIO_Mode_IPU;  // ÉÏÀ­ÊäÈë
+    GPIO_InitStruct.GPIO_Mode  = GPIO_Mode_IPU;  // ä¸Šæ‹‰è¾“å…¥
     GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
 
     GPIO_InitStruct.GPIO_Pin = L2_PIN | L1_PIN | M_PIN;
@@ -21,52 +21,52 @@ void Track_Init(void)
 
 void Track_Run(void)
 {
-    // ¶ÁÈ¡ÎåÂ·»Ò¶È´«¸ĞÆ÷
+    // è¯»å–äº”è·¯ç°åº¦ä¼ æ„Ÿå™¨
     uint8_t L2 = !GPIO_ReadInputDataBit(L2_PORT, L2_PIN);
     uint8_t L1 = !GPIO_ReadInputDataBit(L1_PORT, L1_PIN);
     uint8_t M  = !GPIO_ReadInputDataBit(M_PORT,  M_PIN);
     uint8_t R1 = !GPIO_ReadInputDataBit(R1_PORT, R1_PIN);
     uint8_t R2 = !GPIO_ReadInputDataBit(R2_PORT, R2_PIN);
 
-    // 1. È«ºÚ ¡ú Í£³µ
+    // 1. å…¨é»‘ â†’ åœè½¦
     if(L2 == 0 && L1 == 0 && M == 0 && R1 == 0 && R2 == 0)
     {
         Motor_SetSpeed(0, 0);
     }
-    // 2. È«°×(¶ªÏß) ¡ú ±£³ÖÉÏÒ»´Î×´Ì¬
+    // 2. å…¨ç™½(ä¸¢çº¿) â†’ ä¿æŒä¸Šä¸€æ¬¡çŠ¶æ€
     else if(L2 == 1 && L1 == 1 && M == 1 && R1 == 1 && R2 == 1)
     {
         Motor_SetSpeed(last_left, last_right);
     }
-    // 3. ÖĞ¼äÌ½Í·Ñ¹Ïß ¡ú Ö±ĞĞ
+    // 3. ä¸­é—´æ¢å¤´å‹çº¿ â†’ ç›´è¡Œ
     else if(M == 0)
     {
         last_left  = -STRAIGHT_SPEED;
         last_right = -STRAIGHT_SPEED;
         Motor_SetSpeed(last_left, last_right);
     }
-    // 4. ÇáÎ¢×óÆ«
+    // 4. è½»å¾®å·¦å
     else if(L1 == 0)
     {
         last_left  = -LIGHT_TURN;
         last_right = -STRAIGHT_SPEED;
         Motor_SetSpeed(last_left, last_right);
     }
-    // 5. ÇáÎ¢ÓÒÆ«
+    // 5. è½»å¾®å³å
     else if(R1 == 0)
     {
         last_left  = -STRAIGHT_SPEED;
         last_right = -LIGHT_TURN;
         Motor_SetSpeed(last_left, last_right);
     }
-    // 6. ÑÏÖØ×óÆ«
+    // 6. ä¸¥é‡å·¦å
     else if(L2 == 0)
     {
         last_left  = -MID_TURN;
         last_right = -STRAIGHT_SPEED;
         Motor_SetSpeed(last_left, last_right);
     }
-    // 7. ÑÏÖØÓÒÆ«
+    // 7. ä¸¥é‡å³å
     else if(R2 == 0)
     {
         last_left  = -STRAIGHT_SPEED;
@@ -75,59 +75,59 @@ void Track_Run(void)
     }
 }
 
-// ===================== ÊÓ¾õ/¼õËÙ°åÑ­¼££¨ÍêÕû»Ò¶ÈÂß¼­£¬µÍËÙ²ÎÊı£© =====================
-// ÊÓ¾õÄ£Ê½×¨Êô£º¼ÇÂ¼ÉÏÒ»´Îµç»úËÙ¶È£¬ÊµÏÖ¶ªÏß±£³Ö£¨¶ÀÁ¢±äÁ¿£©
+// ===================== è§†è§‰/å‡é€Ÿæ¿å¾ªè¿¹ï¼ˆå®Œæ•´ç°åº¦é€»è¾‘ï¼Œä½é€Ÿå‚æ•°ï¼‰ =====================
+// è§†è§‰æ¨¡å¼ä¸“å±ï¼šè®°å½•ä¸Šä¸€æ¬¡ç”µæœºé€Ÿåº¦ï¼Œå®ç°ä¸¢çº¿ä¿æŒï¼ˆç‹¬ç«‹å˜é‡ï¼‰
 static int16_t vis_last_left  = -VIS_STRAIGHT_SPEED;
 static int16_t vis_last_right = -VIS_STRAIGHT_SPEED;
 
 void Track_Vision_Run(void)
 {
-    // ¶ÁÈ¡ÎåÂ·»Ò¶È´«¸ĞÆ÷
+    // è¯»å–äº”è·¯ç°åº¦ä¼ æ„Ÿå™¨
     uint8_t L2 = !GPIO_ReadInputDataBit(L2_PORT, L2_PIN);
     uint8_t L1 = !GPIO_ReadInputDataBit(L1_PORT, L1_PIN);
     uint8_t M  = !GPIO_ReadInputDataBit(M_PORT,  M_PIN);
     uint8_t R1 = !GPIO_ReadInputDataBit(R1_PORT, R1_PIN);
     uint8_t R2 = !GPIO_ReadInputDataBit(R2_PORT, R2_PIN);
 
-    // 1. È«ºÚ ¡ú Í£³µ
+    // 1. å…¨é»‘ â†’ åœè½¦
     if(L2 == 0 && L1 == 0 && M == 0 && R1 == 0 && R2 == 0)
     {
         Motor_SetSpeed(0, 0);
     }
-    // 2. È«°×¶ªÏß ¡ú ±£³ÖÉÏÒ»´ÎÔË¶¯×´Ì¬
+    // 2. å…¨ç™½ä¸¢çº¿ â†’ ä¿æŒä¸Šä¸€æ¬¡è¿åŠ¨çŠ¶æ€
     else if(L2 == 1 && L1 == 1 && M == 1 && R1 == 1 && R2 == 1)
     {
         Motor_SetSpeed(vis_last_left, vis_last_right);
     }
-    // 3. ÖĞ¼äÑ¹Ïß ¡ú Ö±ĞĞ£¨Ê¹ÓÃÊÓ¾õµÍËÙ²ÎÊı£©
+    // 3. ä¸­é—´å‹çº¿ â†’ ç›´è¡Œï¼ˆä½¿ç”¨è§†è§‰ä½é€Ÿå‚æ•°ï¼‰
     else if(M == 0)
     {
         vis_last_left  = -VIS_STRAIGHT_SPEED;
         vis_last_right = -VIS_STRAIGHT_SPEED;
         Motor_SetSpeed(vis_last_left, vis_last_right);
     }
-    // 4. ÇáÎ¢×óÆ«
+    // 4. è½»å¾®å·¦å
     else if(L1 == 0)
     {
         vis_last_left  = -VIS_LIGHT_TURN;
         vis_last_right = -VIS_STRAIGHT_SPEED;
         Motor_SetSpeed(vis_last_left, vis_last_right);
     }
-    // 5. ÇáÎ¢ÓÒÆ«
+    // 5. è½»å¾®å³å
     else if(R1 == 0)
     {
         vis_last_left  = -VIS_STRAIGHT_SPEED;
         vis_last_right = -VIS_LIGHT_TURN;
         Motor_SetSpeed(vis_last_left, vis_last_right);
     }
-    // 6. ÑÏÖØ×óÆ«
+    // 6. ä¸¥é‡å·¦å
     else if(L2 == 0)
     {
         vis_last_left  = -VIS_MID_TURN;
         vis_last_right = -VIS_STRAIGHT_SPEED;
         Motor_SetSpeed(vis_last_left, vis_last_right);
     }
-    // 7. ÑÏÖØÓÒÆ«
+    // 7. ä¸¥é‡å³å
     else if(R2 == 0)
     {
         vis_last_left  = -VIS_STRAIGHT_SPEED;

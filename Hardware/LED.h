@@ -1,9 +1,9 @@
 #ifndef __LED_H
 #define __LED_H
 
-void LED_Init(void);   // LED³õÊ¼»¯
-void LED_ON(void);     // µãÁÁLED£¨¸ßµçÆ½£©
-void LED_OFF(void);    // Ï¨ÃğLED
-void LED_Turn(void);   // LED×´Ì¬·­×ª
+void LED_Init(void);   // LEDåˆå§‹åŒ–
+void LED_ON(void);     // ç‚¹äº®LEDï¼ˆé«˜ç”µå¹³ï¼‰
+void LED_OFF(void);    // ç†„ç­LED
+void LED_Turn(void);   // LEDçŠ¶æ€ç¿»è½¬
 
 #endif

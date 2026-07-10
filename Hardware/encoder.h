@@ -3,18 +3,18 @@
 #include "stm32f10x.h"
 #include <stdlib.h>
 
-// ========== MG513X »ô¶ûµç»ú ¾«×¼²ÎÊý ==========
-// 13PPR»ô¶û±àÂëÆ÷ + 1:28¼õËÙ + ËÄ±¶Æµ¼ÆÊý + 65mmÖ±¾¶ÂÖ
-#define PULSE_PER_CM    71     // MG513X£º1ÀåÃ×¡Ö71Âö³å£¨ÒÑ°´65mmÂÖÐ£×¼£©
-#define SPEED_MUL       5      // ËÙ¶È¼ÆËã³ËÊý£¨¿É±£ÁôÔ­²ÎÊý£¬ÎÞÐèÐÞ¸Ä£©
-#define SPEED_DIV       6      // ËÙ¶È¼ÆËã³ýÊý£¨¿É±£ÁôÔ­²ÎÊý£¬ÎÞÐèÐÞ¸Ä£©
+// ========== MG513X éœå°”ç”µæœº ç²¾å‡†å‚æ•° ==========
+// 13PPRéœå°”ç¼–ç å™¨ + 1:28å‡é€Ÿ + å››å€é¢‘è®¡æ•° + 65mmç›´å¾„è½®
+#define PULSE_PER_CM    71     // MG513Xï¼š1åŽ˜ç±³â‰ˆ71è„‰å†²ï¼ˆå·²æŒ‰65mmè½®æ ¡å‡†ï¼‰
+#define SPEED_MUL       5      // é€Ÿåº¦è®¡ç®—ä¹˜æ•°ï¼ˆå¯ä¿ç•™åŽŸå‚æ•°ï¼Œæ— éœ€ä¿®æ”¹ï¼‰
+#define SPEED_DIV       6      // é€Ÿåº¦è®¡ç®—é™¤æ•°ï¼ˆå¯ä¿ç•™åŽŸå‚æ•°ï¼Œæ— éœ€ä¿®æ”¹ï¼‰
 
-// º¯ÊýÉùÃ÷
-void Encoder_TIM2_Init(void);  // ×óÂÖ£¨PA0/PA1£¬TIM2£©
-void Encoder_TIM4_Init(void);  // ÓÒÂÖ£¨PB6/PB7£¬TIM4£©
+// å‡½æ•°å£°æ˜Ž
+void Encoder_TIM2_Init(void);  // å·¦è½®ï¼ˆPA0/PA1ï¼ŒTIM2ï¼‰
+void Encoder_TIM4_Init(void);  // å³è½®ï¼ˆPB6/PB7ï¼ŒTIM4ï¼‰
 int16_t Read_Encoder(int TIMx);
-int32_t Get_Total_CM(void);    // »ñÈ¡×ÜÀï³Ì(cm)
-void Reset_Distance(void);    // ÇåÁãÀï³Ì
+int32_t Get_Total_CM(void);    // èŽ·å–æ€»é‡Œç¨‹(cm)
+void Reset_Distance(void);    // æ¸…é›¶é‡Œç¨‹
 
 #endif
 

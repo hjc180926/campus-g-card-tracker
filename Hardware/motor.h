@@ -3,20 +3,20 @@
 
 #include "stm32f10x.h"
 
-// ===================== µçÈüGÌâ Ğ¡³µ°åµç»úÒı½Å¶¨Òå =====================
-// ×óµç»ú·½Ïò¿ØÖÆ
+// ===================== ç”µèµ›Gé¢˜ å°è½¦æ¿ç”µæœºå¼•è„šå®šä¹‰ =====================
+// å·¦ç”µæœºæ–¹å‘æ§åˆ¶
 #define AIN1_PORT    GPIOB
 #define AIN1_PIN     GPIO_Pin_13
 #define AIN2_PORT    GPIOB
 #define AIN2_PIN     GPIO_Pin_12
 
-// ÓÒµç»ú·½Ïò¿ØÖÆ
+// å³ç”µæœºæ–¹å‘æ§åˆ¶
 #define BIN1_PORT    GPIOB
 #define BIN1_PIN     GPIO_Pin_14
 #define BIN2_PORT    GPIOB
 #define BIN2_PIN     GPIO_Pin_15
 
-// µç»úPWM¿ØÖÆ
+// ç”µæœºPWMæ§åˆ¶
 #define PWMA_PORT    GPIOA
 #define PWMA_PIN     GPIO_Pin_11
 #define PWMB_PORT    GPIOA
@@ -25,10 +25,10 @@
 #define PWM_MAX   999
 #define PWM_MIN  -999
 
-// º¯ÊıÉùÃ÷
+// å‡½æ•°å£°æ˜
 void Motor_Init(void);
 void Motor_SetSpeed(int16_t left, int16_t right);
-void Motor_Stop(void);  // ĞÂÔö£ºµç»úÍ£Ö¹º¯Êı
+void Motor_Stop(void);  // æ–°å¢ï¼šç”µæœºåœæ­¢å‡½æ•°
 int GFP_abs(int p);
 
 #endif

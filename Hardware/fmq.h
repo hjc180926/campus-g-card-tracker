@@ -1,10 +1,10 @@
 #ifndef __FMQ_H
 #define __FMQ_H
 
-void FMQ_Init(void);   // ·äÃùÆ÷³õÊ¼»¯
-void FMQ_ON(void);     // ·äÃùÆ÷Ïì£¨¸ßµçÆ½£©
-void FMQ_OFF(void);    // ·äÃùÆ÷Í££¨µÍµçÆ½£©
-void FMQ_Turn(void);   // ·äÃùÆ÷×´Ì¬·­×ª
+void FMQ_Init(void);   // èœ‚é¸£å™¨åˆå§‹åŒ–
+void FMQ_ON(void);     // èœ‚é¸£å™¨å“ï¼ˆé«˜ç”µå¹³ï¼‰
+void FMQ_OFF(void);    // èœ‚é¸£å™¨åœï¼ˆä½Žç”µå¹³ï¼‰
+void FMQ_Turn(void);   // èœ‚é¸£å™¨çŠ¶æ€ç¿»è½¬
 
 #endif
 

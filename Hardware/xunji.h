@@ -5,7 +5,7 @@
 #include "motor.h"
 #include "delay.h"
 
-// ÎåÂ·»Ò¶È´«¸ĞÆ÷Òı½Å£¨Ô­ÓĞÅäÖÃ²»±ä£©
+// äº”è·¯ç°åº¦ä¼ æ„Ÿå™¨å¼•è„šï¼ˆåŸæœ‰é…ç½®ä¸å˜ï¼‰
 #define L2_PIN     GPIO_Pin_5
 #define L2_PORT    GPIOA
 #define L1_PIN     GPIO_Pin_6
@@ -17,19 +17,19 @@
 #define R2_PIN     GPIO_Pin_1
 #define R2_PORT    GPIOB
 
-// ==================== ºìÍâÑ­¼£ËÙ¶È£¨Ô­ÓĞ²ÎÊı£¬¹Ì¶¨²»±ä£© ====================
-#define STRAIGHT_SPEED      220
-#define LIGHT_TURN          160
-#define MID_TURN            100
+// ==================== ç°åº¦å¾ªè¿¹é€Ÿåº¦ï¼ˆåŸæœ‰å‚æ•°ï¼Œå›ºå®šä¸å˜ï¼‰ ====================
+#define STRAIGHT_SPEED      320
+#define LIGHT_TURN          260
+#define MID_TURN            200
 
-// ==================== ÊÓ¾õÑ­¼£¶ÀÁ¢ËÙ¶È£¨¿É×ÔÓÉµ÷½Ú£© ====================
-#define VIS_STRAIGHT_SPEED  160
-#define VIS_LIGHT_TURN      100
-#define VIS_MID_TURN        40
+// ==================== è§†è§‰å¾ªè¿¹ç‹¬ç«‹é€Ÿåº¦ï¼ˆå¯è‡ªç”±è°ƒèŠ‚ï¼‰ ====================
+#define VIS_STRAIGHT_SPEED  320
+#define VIS_LIGHT_TURN      260
+#define VIS_MID_TURN        200
 
-// º¯ÊıÉùÃ÷
+// å‡½æ•°å£°æ˜
 void Track_Init(void);
-void Track_Run(void);        // Ô­ÓĞºìÍâÑ­¼£
-void Track_Vision_Run(void); // ĞÂÔöÊÓ¾õÑ­¼£
+void Track_Run(void);        // åŸæœ‰çº¢å¤–å¾ªè¿¹
+void Track_Vision_Run(void); // æ–°å¢è§†è§‰å¾ªè¿¹
 
 #endif

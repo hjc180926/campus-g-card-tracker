@@ -2,12 +2,12 @@
 #include "encoder.h"
 #include "motor.h"
 
-uint32_t run_time_ms = 0;   // ÔËĞĞ×ÜÊ±¼ä£¨ºÁÃë£©
-uint8_t  time_run_flag = 0; // ¼ÆÊ±Æô¶¯±êÖ¾
-uint8_t  oled_refresh_flag = 0; // OLEDË¢ĞÂ±êÖ¾
-uint16_t encoder_tick = 0;  // ±àÂëÆ÷¶ÁÈ¡¼ÆÊ±
+uint32_t run_time_ms = 0;   // è¿è¡Œæ€»æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
+uint8_t  time_run_flag = 0; // è®¡æ—¶å¯åŠ¨æ ‡å¿—
+uint8_t  oled_refresh_flag = 0; // OLEDåˆ·æ–°æ ‡å¿—
+uint16_t encoder_tick = 0;  // ç¼–ç å™¨è¯»å–è®¡æ—¶
 
-// TIM3 1msÖĞ¶Ï³õÊ¼»¯£¨72MHz£©
+// TIM3 1msä¸­æ–­åˆå§‹åŒ–ï¼ˆ72MHzï¼‰
 void TIM3_Init(void)
 {
     TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
@@ -31,18 +31,18 @@ void TIM3_Init(void)
     NVIC_Init(&NVIC_InitStructure);
 }
 
-// ===================== TIM3 1ms ÖĞ¶Ï·şÎñº¯Êı£¨GÌâºËĞÄ£© =====================
+// ===================== TIM3 1ms ä¸­æ–­æœåŠ¡å‡½æ•°ï¼ˆGé¢˜æ ¸å¿ƒï¼‰ =====================
 void TIM3_IRQHandler(void)
 {
     if(TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
     {
-        // 1. ÀÛ¼ÆĞĞÊ»Ê±¼ä£¨Ğ¡³µÆô¶¯ºó¿ªÊ¼¼ÆÊ±£©
+        // 1. ç´¯è®¡è¡Œé©¶æ—¶é—´ï¼ˆå°è½¦å¯åŠ¨åå¼€å§‹è®¡æ—¶ï¼‰
         if(time_run_flag)
         {
             run_time_ms++;
         }
 
-        // 2. 5ms ¶ÁÈ¡Ò»´Î±àÂëÆ÷£¨¼ÆËãËÙ¶È/Àï³Ì£©
+        // 2. 5ms è¯»å–ä¸€æ¬¡ç¼–ç å™¨ï¼ˆè®¡ç®—é€Ÿåº¦/é‡Œç¨‹ï¼‰
         encoder_tick++;
         if(encoder_tick >= 5)
         {
@@ -52,7 +52,7 @@ void TIM3_IRQHandler(void)
             encoder_tick = 0;
         }
 
-        // 3. 50ms Ë¢ĞÂÒ»´ÎOLED£¨·ÀÖ¹ÉÁË¸£©
+        // 3. 50ms åˆ·æ–°ä¸€æ¬¡OLEDï¼ˆé˜²æ­¢é—ªçƒï¼‰
         if(run_time_ms % 50 == 0)
         {
             oled_refresh_flag = 1;

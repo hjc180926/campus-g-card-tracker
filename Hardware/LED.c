@@ -1,34 +1,34 @@
 #include "stm32f10x.h"
 
-// PA2 ¸ßµçÆ½µãÁÁLED
+// PA2 é«˜ç”µå¹³ç‚¹äº®LED
 void LED_Init(void)
 {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    // ½öÅäÖÃ PA2
+    // ä»…é…ç½® PA2
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    // ³õÊ¼×´Ì¬£ºµÍµçÆ½ ¡ú Ï¨Ãğ
+    // åˆå§‹çŠ¶æ€ï¼šä½ç”µå¹³ â†’ ç†„ç­
     GPIO_ResetBits(GPIOA, GPIO_Pin_2);
 }
 
-// ¸ßµçÆ½µãÁÁ
+// é«˜ç”µå¹³ç‚¹äº®
 void LED_ON(void)
 {
     GPIO_SetBits(GPIOA, GPIO_Pin_2);
 }
 
-// µÍµçÆ½Ï¨Ãğ
+// ä½ç”µå¹³ç†„ç­
 void LED_OFF(void)
 {
     GPIO_ResetBits(GPIOA, GPIO_Pin_2);
 }
 
-// µçÆ½·­×ª
+// ç”µå¹³ç¿»è½¬
 void LED_Turn(void)
 {
     if(GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_2) == 0)
