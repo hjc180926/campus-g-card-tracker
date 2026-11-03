@@ -19,3 +19,6 @@ JLinkLog.txt
 # Windows
 Thumbs.db
 desktop.ini
+
+# Office 临时锁文件
+~$*
