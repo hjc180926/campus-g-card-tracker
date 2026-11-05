@@ -21,9 +21,13 @@
 | 电机 PWM | PWMA PA11 · PWMB PA8（TIM1） |
 | 编码器 | 左 PA0/PA1（TIM2）· 右 PB6/PB7（TIM4） |
 | 灰度循迹 | L2 PA5 · L1 PA6 · M PA7 · R1 PB0 · R2 PB1 |
-| 视觉串口 | USART3（接 K210） |
-| 显示 | OLED（I2C） |
-| 提示 | 蜂鸣器 + LED + 按键 |
+| 视觉串口 | USART3 RX：PB11（接 K230 UART4 TX） |
+| 显示 | OLED 128×64，软件 I2C：PB8 SCL / PB9 SDA |
+| 按键 | PB3 · PB4（上拉输入，JTAG 已关闭以释放引脚） |
+| LED / 蜂鸣器 | LED：PA2 · 蜂鸣器：PB5 |
+| 电源 | 12V 输入，LM2596 降到 5V，MCU 3.3V |
+
+> 完整引脚表、定时器分配与关键参数见 [`docs/校赛G题-小车配置.docx`](docs/校赛G题-小车配置.docx)。
 
 ## 版本
 
@@ -47,6 +51,7 @@ Library/         STM32F10x 标准外设库
 start/           启动文件与 CMSIS
 progect.uvprojx  Keil 工程文件
 k230-card-recognition/   K230 视觉端（MicroPython，分类模型 55 类）
+docs/            引脚配置与功能说明文档
 ```
 
 ## 编译
