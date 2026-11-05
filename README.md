@@ -37,6 +37,18 @@ v2 与 v1 的差异集中在 `main.c`、`uart.c`、`uart.h`、`stm32f10x_it.c`�
 v3 相对 v2 改动更大：新增 `OLED_Data.c` / `OLED_Data.h` 字库，`main.c`、`OLED.c`、
 `motor.c`、`tim.c` 等 19 个文件均有修改。
 
+## 目录
+
+```
+Hardware/        电机、编码器、OLED、循迹、蜂鸣器、按键、串口驱动
+User/            main.c、中断与时钟配置
+System/          Delay 延时
+Library/         STM32F10x 标准外设库
+start/           启动文件与 CMSIS
+progect.uvprojx  Keil 工程文件
+k230-card-recognition/   K230 视觉端（MicroPython，分类模型 55 类）
+```
+
 ## 编译
 
 1. Keil MDK 打开根目录的 `progect.uvprojx`
@@ -48,4 +60,5 @@ v3 相对 v2 改动更大：新增 `OLED_Data.c` / `OLED_Data.h` 字库，`main.
   需把编码切换为 GBK / GB2312，或安装 GBK 插件。
 - 仓库不含 `Objects/`、`Listings/` 等编译产物，clone 后需自行编译。
 - `Library/` 是 STM32F10x 标准外设库，`start/` 是启动文件，均保留以便直接编译。
-- K210 端的牌面识别程序不在本仓库中。
+- 视觉端代码见 `k230-card-recognition/`，K230 通过 UART4 以 UTF-8 发送牌名，
+  接 STM32 的 USART3（PB11）。
